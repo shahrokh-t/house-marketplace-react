@@ -95,7 +95,7 @@ function SignUp() {
             />
           </div>
 
-          <Link to="/forgot-password" className="forgotPasswordLink">Forgot Password </Link>
+          {/* <Link to="/forgot-password" className="forgotPasswordLink">Forgot Password </Link> */}
           <div className="signInBar">
             <p className="signUpText">
               Sign Up
