@@ -134,6 +134,10 @@ button {
   }
 }
 
+.pageContainer{
+  margin-bottom: 10rem;
+}
+
 .pageHeader {
   font-size: 2rem;
   font-weight: 800;
