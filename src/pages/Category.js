@@ -4,6 +4,7 @@ import { collection, getDocs, query, where, orderBy, limit, startAfter } from "f
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import ListingItem from "../components/ListingItem";
 
 function Category() {
     const [listings, setListings] = useState(null);
@@ -12,40 +13,41 @@ function Category() {
     const params = useParams();
 
     useEffect(() => {
-        const fetchListings = async () => {
-            try {
-                // Get reference
-                const listingsRef = collection(db, "listings")
-
-                // Create a query
-                const q = query(
-                    listingsRef,
-                    where("type", "==", params.categoryName),
-                    orderBy("timestamp", "desc"),
-                    limit(10)
-                )
-
-                // Execute query
-                const querySnap = await getDocs(q);
-
-                const listings = [];
-
-                querySnap.forEach((doc) => {
-                    return listings.push({
-                        id: doc.id,
-                        data: doc.data()
-                    })
-                })
-
-                setListings(listings);
-                setLoading(false);
-
-            } catch (error) {
-                toast.error("Could not fetch listings")
-            }
-        }
         fetchListings();
     }, [params.categoryName])
+
+    const fetchListings = async () => {
+        try {
+            // Get reference
+            const listingsRef = collection(db, "listings")
+
+            // Create a query
+            const q = query(
+                listingsRef,
+                where("type", "==", params.categoryName),
+                orderBy("timestamp", "desc"),
+                limit(10)
+            )
+
+            // Execute query
+            const querySnap = await getDocs(q);
+
+            const listings = [];
+
+            querySnap.forEach((doc) => {
+                return listings.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            })
+
+            setListings(listings);
+            setLoading(false);
+
+        } catch (error) {
+            toast.error("Could not fetch listings")
+        }
+    }
 
     return (
         <div className="category">
@@ -62,7 +64,11 @@ function Category() {
                     <main>
                         <ul className="categoryListings">
                             {listings.map((listing) => (
-                                <h3 key={listing.id}>{listing.data.name}</h3>
+                                <ListingItem 
+                                listing={listing.data}
+                                id={listing.id}
+                                key={listing.id}
+                                />
                             ))}
                         </ul>
                     </main>
