@@ -746,7 +746,15 @@ button {
   color: #ffffff;
 }
 
-.flex {
+/* .flex {
+  display: flex;
+} */
+
+.formRooms {
+  display: flex;
+}
+
+.formLatLng {
   display: flex;
 }
 
