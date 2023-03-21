@@ -42,6 +42,10 @@ function Slider() {
         return <Spinner />
     }
 
+    if (listings.length === 0) {
+        return <></>
+    }
+
     return listings && (
         <>
             <p className="exploreHeading">Recommended</p>
@@ -56,7 +60,7 @@ function Slider() {
                         <div style={{ background: `url(${data.imgUrls[0]}) center no-repeat`, backgroundSize: "cover" }} className="swiperSlideDiv">
                             <p className="swiperSlideText">{data.name}</p>
                             <p className="swiperSlidePrice">${data.discountedPrice ?? data.regularPrice} {" "}
-                            {data.type === "rent" && "/ month"}
+                                {data.type === "rent" && "/ month"}
                             </p>
                         </div>
                     </SwiperSlide>
