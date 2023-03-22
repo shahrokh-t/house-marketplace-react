@@ -42,6 +42,7 @@ function ListingItem({ listing, id, onDelete, onEdit }) {
                 className="editIcon" 
                 onClick={() => onEdit(id)} />
             )}
+            
         </li>
     )
 }

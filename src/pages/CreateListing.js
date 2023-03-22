@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import {addDoc, collection, serverTimestamp} from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
@@ -112,6 +112,8 @@ function CreateListing() {
                             case 'running':
                                 console.log('Upload is running');
                                 break;
+                            default:
+                                break;
                         }
                     },
                     (error) => {
@@ -137,7 +139,7 @@ function CreateListing() {
         })
 
         const formDataCopy = {
-            ...formData, 
+            ...formData,
             imgUrls,
             geolocation,
             timestamp: serverTimestamp()
